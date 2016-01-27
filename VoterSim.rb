@@ -77,7 +77,7 @@ class World
     start
   end
 
-def update_voter
+  def update_voter
     puts "Please choose to update a Voter (V) or Politician(P) ?"
     answer3 = gets.chomp.downcase
 
@@ -134,38 +134,34 @@ def update_voter
       end
       start
 
-
-     when "p"
+    when "p"
       puts "Name of the politician you want to delete?"
       delete_politician = gets.chomp.downcase
-      @@politician.delete_if do |l| l.name == delete_politician
-
+      @@politician.delete_if { |l| l.name == delete_politician }
     end
 
     start
   end
-  end
-
 end
 
-        class Voter < World
-          attr_accessor :name, :party
+class Voter < World
+  attr_accessor :name, :party
 
-          def initialize(name, party)
-            @name = name
-            @party = party
-            @@voters << self
-          end
-        end
+  def initialize(name, party)
+    @name = name
+    @party = party
+    @@voters << self
+  end
+end
 
 
-        class Politician < Voter
-          def initialize(name, party)
-            @name = name
-            @party = party
-            @@voters << self
-            @@politician << self
-          end
-        end
+class Politician < Voter
+  def initialize(name, party)
+    @name = name
+    @party = party
+    @@voters << self
+    @@politician << self
+  end
+end
 
-        World.new
+World.new
